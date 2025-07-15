@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate die Zahl</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JunusErgin/fast-ui/style.css">
+    <link rel="stylesheet" href="./loadingSpinner.css">
+</head>
+
+<body>
+    <header>Rate die Zahl</header>
+    <div class="container">
+        <h1> Versuche die Zahl zu raten</h1>
+        <h2 id="trys">Versuche: 0</h2>
+        <h3 id="allreadyTryed"></h3>
+        <input id="input" type="number" required placeholder="hier zahl eintippen...">
+        <button onclick="checkNumber()">Rate</button>
+        <div id="equal">
+        </div>
+    </div>
+</body>
+<script src="./script.js"></script>
+
+</html>
