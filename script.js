@@ -1,7 +1,6 @@
-let numberToGues = Math.round(Math.random() * 10);
+const numberToGuess = Math.round(Math.random() * 10);
+const allreadyUsedNumbers = [];
 let trysCount = 0;
-let inputField = document.getElementById("input");
-let allreadyUsedNumbers = [];
 
 function init() {
     createMessageArea();
@@ -9,21 +8,27 @@ function init() {
     createCongratulatinContainer()
 }
 
-
-function checkNumber() {
+function checkNumber(event) {
+    event.preventDefault();
+    let inputField = document.getElementById("input");
+    const button = document.getElementById("button");
+    button.disabled = true;
     showLoadingSpinner();
+    timeOutSettings(inputField);
+}
+
+function timeOutSettings(inputField) {
+    const button = document.getElementById("button");
     setTimeout(() => {
-        if (parseInt(inputField.value) !== numberToGues) {
-            wrongNumber();
-            hideLoadingSpinner();
+        if (parseInt(inputField.value) !== numberToGuess) {
+            wrongNumber(inputField);
         } else {
-            hideLoadingSpinner();
             showCongratulation();
             setTimeout(() => {
-                rightNumber();
+                rightNumber(inputField);
                 hideCongratulation();
             }, 200)
-        }
+        }button.disabled = false;
     }, 500);
 }
 
@@ -49,37 +54,37 @@ function createCongratulatinContainer() {
 
 function showLoadingSpinner() {
     document.getElementById("loadingSpinner").classList.remove("dNone");
+    messageArea = document.getElementById("messageArea")
     messageArea.classList.add("dNone");
 }
 
 function hideLoadingSpinner() {
     document.getElementById("loadingSpinner").classList.add("dNone");
+    messageArea = document.getElementById("messageArea")
     messageArea.classList.remove("dNone");
 }
 
-function wrongNumber() {
+function wrongNumber(inputField) {
+    hideLoadingSpinner();
     document.getElementById("messageArea").innerHTML = "Leider war deine zahl falsch, versuche es noch einmal";
-    joinAllreadyUsedNumbers();
+    joinAllreadyUsedNumbers(inputField);
     trysCount++;
     document.getElementById("trys").innerHTML = "Versuche: " + trysCount;
     inputField.value = "";
 }
 
-function rightNumber() {
+function rightNumber(inputField) {
     trysCount++;
-    joinAllreadyUsedNumbers();
+    joinAllreadyUsedNumbers(inputField);
     throwConfetti();
-    document.getElementById("messageArea").innerHTML = "Sehr gut, du hast die Zahl beim " + `${trysCount}` + ". Versuch erraten!"
+    const letzteZahl = allreadyUsedNumbers[allreadyUsedNumbers.length -1];
+    document.getElementById("messageArea").innerHTML = "Sehr gut, du hast die Zahl beim " + `${trysCount}` + ". Versuch erraten!<br> Die richtige Zahl war die: " + `${letzteZahl}`;
     document.getElementById("trys").innerHTML = "Versuche: " + trysCount
     inputField.value = "";
 }
 
-function pushAllreadyUsedNumbersToArray() {
+function joinAllreadyUsedNumbers(inputField) {
     allreadyUsedNumbers.push(inputField.value);
-}
-
-function joinAllreadyUsedNumbers() {
-    pushAllreadyUsedNumbersToArray();
     document.getElementById("allreadyTryed").innerHTML = "";
     document.getElementById("allreadyTryed").innerHTML = "Bereits versuchte Zahlen: <br>" + allreadyUsedNumbers.join(",");
 }

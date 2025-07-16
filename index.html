@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rate die Zahl</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/JunusErgin/fast-ui/style.css">
     <link rel="stylesheet" href="./loadingSpinner.css">
     <link rel="stylesheet" href="./styleAnpassung.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
 </head>
 
 <body onload="init()">
@@ -18,8 +21,10 @@
         <h1> Versuche die Zahl zu raten</h1>
         <h2 id="trys">Versuche: 0</h2>
         <h3 id="allreadyTryed"></h3>
-        <input id="input" type="number" required placeholder="hier zahl eintippen...">
-        <button onclick="checkNumber()">Rate</button>
+        <form onsubmit="checkNumber(event)">
+            <input id="input" type="number" required placeholder="hier zahl eintippen...">
+            <button id="button" onclick="checkNumber()">Rate</button>
+        </form>
         <div id="equal">
         </div>
     </div>
