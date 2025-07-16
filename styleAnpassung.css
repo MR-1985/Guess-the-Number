@@ -31,8 +31,8 @@ input {
     align-items: center;
 }
 
-body {
-    height: calc(100vh - 50px);
+body{
+    height: calc(100vh - 60px);
 }
 
 footer {
