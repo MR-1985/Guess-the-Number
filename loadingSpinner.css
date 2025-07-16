@@ -18,12 +18,4 @@
     }
 }
 
-.dNone {
-    display: none;
-}
 
-#equal{
-    display: flex;
-    width: 160px;
-    justify-content: center;
-}
